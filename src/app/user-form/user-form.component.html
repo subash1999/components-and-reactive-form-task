@@ -1,0 +1,28 @@
+<form action="" class="mt-3" [formGroup]="registrationForm">
+  <h3 class="text-center">Register User Form</h3>
+  <div class="mb-3">
+    <label for="username" class="form-label">Username</label>
+    <input formControlName="userName" [class.is-invalid]="userName.invalid && userName.touched"
+      type="text"
+      class="form-control" />
+      <div *ngIf="userName.invalid && userName.touched">
+        <small class="text-danger" *ngIf="userName.errors?.required">Username is required.</small>
+        <small class="text-danger" *ngIf="userName.errors?.forbiddenString">Username <b>{{userName.errors?.forbiddenString.value}}</b> is not allowed.</small>
+      </div>
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" formControlName="password" [class.is-invalid]="password.invalid && password.touched"
+      class="form-control" />
+      <div *ngIf="password.invalid && password.touched">
+        <small class="text-danger" *ngIf="password.errors?.required">Password is required.</small>
+        <small class="text-danger" *ngIf="password.errors?.minlength">Password must be at least 8 characters long.</small>
+      </div>
+  </div>
+  <div class="mb-3">
+    <label for="confirm_password" class="form-label">Confirm Password</label>
+    <input type="password" formControlName="confirmPassword" [class.is-invalid]="confirmPassword.invalid && confirmPassword.touched"
+      class="form-control" />
+  </div>
+  <input type="submit" value="Register" [disabled]="!registrationForm.valid" class="btn btn-primary float-end" />
+</form>
